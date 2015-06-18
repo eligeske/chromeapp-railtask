@@ -1,32 +1,14 @@
 <a target="_blank" href="https://chrome.google.com/webstore/detail/ajjcafkkflbcealbcfjajolnkogffgcb">![Try it now in CWS](https://raw.github.com/GoogleChrome/chrome-app-samples/master/tryitnowbutton.png "Click here to install this sample from the Chrome Web Store")</a>
 
 
-# Hello World storage.sync
+# Rail Task chrome application
 
-Use chrome.storage.sync to share small chunks of data among all of your Chrome devices. To test, open this app in two different devices, both signed in with the same user.
+So many task apps, why another one? Missing features, or too many, this will be just right..... ┗(-_-)┛
 
-Important: needs "key" in manifest.json to support testing outside of CWS, so that sync storage is shared among different instances.
+Goal is to have tasks organized by project with a fast view to know if there is something to be done today or if any are worth money.
 
+If you are like me and will not look at a task list if you have to open something then you may enjoy this. 
 
-    // app.js
-    chrome.storage.sync.set({"myValue": newValue}, mycallback);
-    ...
-    chrome.storage.onChanged.addListener(
-      function(changes, namespace) {
-        // do something
-      }
-    );
-    ...
-    chrome.storage.sync.get("myValue", 
-      function(val) {
-        // do something
-      }
-    );
+This will continually be worked onto to reach the maximum in-your-face experience.
 
-## APIs
-
-* [Storage sync](http://developer.chrome.com/extensions/storage.html)
-     
-## Screenshot
-![screenshot](/samples/hello-world-sync/assets/screenshot_1280_800.png)
 
