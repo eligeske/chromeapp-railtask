@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "version": "0.0.0.1",
+  "name": "Rail Task",
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  },
+  "permissions": ["storage"]
+}

@@ -1,0 +1,194 @@
+html, body { font-size: 100% !important; margin: 0; padding: 0;
+        line-height: 1.5;
+          font-family: "Roboto", sans-serif;
+          font-weight: normal;
+          color: rgba(0, 0, 0, 0.87);
+      }
+      button {
+        border: none;
+        background: rgba(228, 228, 228, 0.53); padding: 10px; cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button:hover:not(:disabled) { background-color: rgba(228, 228, 228, 1); }
+      button:hover.negative:not(:disabled) { background-color: rgba(244, 162, 162, 1); }
+      button:hover.positive:not(:disabled) { background-color: rgba(162, 244, 179, 1); }
+      input, textarea {
+        box-sizing: border-box; border:none; border-bottom: 1px solid rgba(228, 228, 228, 1); padding: 10px; width: 100%; 
+      }
+      button, input, select, textarea { outline: none; }
+      /* layout */
+      aside {
+        position: fixed; top: 0px; bottom: 0px;
+        border-right: 1px solid #ccc; box-sizing: border-box;  
+        width: 100px;      
+      }
+      aside button { width: 100%; }
+      aside form {
+        position: fixed; bottom: 0px; width: 100px;
+      }
+      
+      aside li {
+        padding: 8px 2px 8px 10px;       
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      aside li:hover, li.selected  {
+        font-weight: bold;
+      }
+      ul { list-style: none; margin: 0; padding: 0; }
+      li { margin: 0; padding: 0;  }
+      
+      li.selected::before {
+         content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          margin: 5px 0 0 -10px;
+          border-top: 8px solid transparent;
+          border-left: 5px solid rgb(71, 71, 71);
+          border-bottom: 8px solid transparent;
+          z-index: -1;
+      }
+      
+      article form label {
+          font-size: 12px;
+          margin: 0 0 -15px 5px;
+          position: absolute;
+          box-sizing: border-box;
+          width: 100%;
+          color: rgb(190, 190, 190);
+          background: rgba(255,255,255,1);
+          box-shadow: 0px 4px 9px -3px rgba(255,255,255,1);
+      }
+       input {
+        background: rgba(255,255,255,.3);
+        border: 0;  line-height: 45px;  font-size: 15px;  padding-bottom: 0;
+        border-bottom: 1px solid rgba(0,0,0,.11);
+      }
+      
+      section .button-group button {
+        position: fixed; bottom:0px; width:250px;
+      } 
+      section form .button-group button { width: 125px; }
+      section form .button-group button:last-of-type { right: 0px; }
+      article {
+        position: fixed; top: 0px; left: 100px; right: 0px; bottom: 0px;
+        box-sizing: border-box;
+      }
+      article h1 {
+        margin: 0; padding: 10px; background: rgb(0, 129, 255); color: #fff; 
+      }
+      article h1 input { color: #fff; font-weight: bold; width: 100px; height: 25px; line-height: 25px }      
+      article textarea {
+          width: 100%;
+          box-sizing: border-box;
+          padding-top: 20px;
+          height: 156px;
+      }
+      .task-scroll-wrap {
+         position: fixed;
+         overflow-x: hidden; overflow-y: auto;
+         top: 50px; bottom: 35px; right: 0px;
+         left: 105px;
+         padding: 10px;
+      }
+      
+      @font-face {
+        font-family: "Roboto";
+        src: url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
+        font-weight: 200; }
+      
+      @font-face {
+        font-family: "Roboto";
+        src: url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
+        font-weight: 300; }
+      
+      @font-face {
+        font-family: "Roboto";
+        src: url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
+        font-weight: 400; }
+      
+      @font-face {
+        font-family: "Roboto";
+        src: url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
+        font-weight: 500; }
+      
+      @font-face {
+        font-family: "Roboto";
+        src: url("../font/roboto/Roboto-Bold.woff2") format("woff2"), url("../font/roboto/Roboto-Bold.woff") format("woff"), url("../font/roboto/Roboto-Bold.ttf") format("truetype");
+        font-weight: 700; }
+        
+        
+.pull-right {
+   float: right;
+}
+.pull-right::after { clear: right; }
+.btn-circle {
+        display: block;
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+        line-height: 19px;
+        text-align: center;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.17);
+        background: rgba(255, 255, 255, 0.23);
+        border-radius: 13px;
+        transition: background 0.3s ease;
+}
+.btn-circle:hover {
+        background: rgba(255, 255, 255, 0.42);
+        box-shadow: none;
+}
+.btn-circle img {
+   height: 30%; width: 30%;
+   
+}
+.task-bubble {
+   width: 120px;
+   height: 80px;
+   background: red;
+   position: relative;
+   -moz-border-radius:    10px;
+   -webkit-border-radius: 10px;
+   border-radius:         10px;
+}
+.task-bubble:before {
+   content:"";
+   position: absolute;
+   right: 100%;
+   top: 26px;
+   width: 0;
+   height: 0;
+   border-top: 13px solid transparent;
+   border-right: 26px solid red;
+   border-bottom: 13px solid transparent;
+}
+
+form div > div {
+  height: 40px;
+  line-height: 55px;
+  padding-left: 15px;
+}
+
+.button-bar {
+  padding:5px; border-bottom: 1px solid rgba(0,0,0,.11);
+}
+
+.button-bar .btn { 
+  padding: 0; margin: 0;
+  display: inline-block; height: 25px; width: 25px; cursor: pointer; 
+  background-position: center center; 
+  background-repeat: no-repeat; 
+  background-color: rgba(155, 155, 155, 0.78) !important;
+}
+
+.button-bar .positive:hover, .button-bar .positive.selected {
+  background-color: rgb(0, 189, 17) !important;
+}
+.button-bar .negative:hover, .button-bar .negative.selected {
+  background-color: rgb(255, 67, 67) !important;
+}
+
+.button-bar .money { background-image: url(../imgs/usd.png);background-size: 48%; }
+.button-bar .today { background-image: url(../imgs/fire.png); background-size: 62%; background-position-y: 3px; }
+.button-bar .delete { background-image: url(../imgs/trash.png); background-size: 55%; float:right; margin-right: 5px;}

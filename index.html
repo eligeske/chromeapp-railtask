@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="js/angular-csp.css" />
+   <link href='css/style.css' rel='stylesheet' type='text/css'>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <style>
+      
+    </style>
+  </head>
+
+  <body ng-app="railTask">
+    <main ng-controller="MainCtrl">      
+      <aside>
+        <ul>
+          <li ng-class="{selected: project == selectedProject}" ng-repeat="project in projectList" ng-click="showProjectDetails(project)">{{project.name}} - {{project.moneyCount}}</li>
+        </ul>
+        <form>
+          <input ng-show="showForm" type="text" ng-blur="showForm = false" focus-me="showForm" ng-keyup="checkkey($event)" ng-model="newProjectName" />
+          <button class="positive" ng-hide="showForm" ng-click="showForm = true">+ add proj</button>
+          <button class="negative" ng-show="showForm" ng-click="showForm = false">cancel</button>
+        </form>
+      </aside>
+      <article ng-controller="ProjectCtrl">
+        <!-- Project Details -->
+        <section ng-show="selectedProject">
+          <h1>
+           <span ng-hide="titleEditing" ng-click="titleEditing=true">{{selectedProject.name}}</span>
+           <span ng-show="titleEditing">
+             <input  ng-keyup="checkkey($event)" focus-me="titleEditing" ng-model="selectedProject.name" />
+           </span>
+           <span ng-hide="titleEditing" ng-click="$parent.selectedProject = false" class="btn-circle pull-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"></span></h1>
+          <div>
+            <!-- task list -->
+            <div ng-hide="selectedTask">
+              <div class="task-scroll-wrap">
+                <ul ng-show="selectedProject.taskList.length">
+                  <li ng-repeat="task in selectedProject.taskList">
+                    
+                    <span ng-show="task.money">&dollar;</span>
+                    <span ng-show="task.today">[!]</span>
+                    <span ng-click="showTaskDetails(task)">{{task.name}}</span>
+                    <span ng-click="task.done = !task.done">{{task.done ? "[ X ]" : "[   ]" }}</span>
+                  </li>  
+                </ul>
+                </div>
+                <div ng-hide="selectedProject.taskList.length">Add task below</div>
+            </div>
+            <!-- task form -->
+            <form ng-show="selectedTask">
+              <div class="button-bar">
+                <span ng-click="selectedTask.money = !selectedTask.money" ng-class="{selected:selectedTask.money}" class="btn money positive">&nbsp;</span>
+                <span ng-click="selectedTask.today = !selectedTask.today" ng-class="{selected:selectedTask.today}" class="btn today negative">&nbsp;</span>
+                <span ng-click="delete()" class="btn delete negative">&nbsp;</span>
+              </div>
+              <div>
+                <label>task name</label>
+                <input focus-me="selectedTask" ng-model="selectedTask.name" />  
+              </div>  
+              <div>
+                <label>task description</label>
+                <textarea ng-model="selectedTask.description"></textarea>  
+              </div>             
+              <div>
+                <label>date created</label>
+                <div>{{selectedTask.createdDate}}</div>  
+              </div>
+              <div class="button-group">
+                <button class="positive" ng-click="save()" ng-disabled="!selectedTask.name.length">save</button>
+                <button class="negative" ng-click="cancel()">cancel</button>
+              </div>              
+            </form>  
+            <div class="button-group">           
+              <button class="positive"  ng-hide="selectedTask" ng-click="addTask()">+ add task</button>
+            </div>
+          </div>  
+        </section>
+        
+
+      </article>
+    </main>
+  
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+
+  </body>
+</html>
+      
