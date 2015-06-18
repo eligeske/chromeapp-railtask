@@ -62,14 +62,27 @@
             resetForm();
           }
         };
-        var setCounts = function(){
-          
+        var setCounts = function(proj){
+          proj.moneyCount = $scope.getMoneyCount(proj);
+          proj.todayCount = $scope.getTodayCount(proj);
+          proj.openCount = $scope.getOpenCount(proj);           
         }
+        
+        $scope.updateCounts = function(){
+          if($scope.selectedProject){
+            setCounts($scope.selectedProject);
+          }
+        };
+        $scope.getOpenCount = function(proj){
+          return myHelpers.array.filterByProps(proj.taskList,{
+            done: false
+          }).length;
+        };
         $scope.getMoneyCount = function(proj){
           return myHelpers.array.filterByProps(proj.taskList,{
             money: true, done: false
           }).length;
-        }
+        };
         $scope.getTodayCount = function(proj){
           return myHelpers.array.filterByProps(proj.taskList,{
             today: true, done: false
@@ -83,12 +96,9 @@
             resetForm();
           }
         });
-        $scope.$watch('selectedProject',function(){
-          
-        });
         chrome.storage.sync.get(function(items){
           $.each(items,function(guid,item){
-            item.moneyCount = $scope.getMoneyCount(item);
+            setCounts(item);
             $scope.projectList.push(item); 
           });          
           if($scope.projectList.length){
@@ -101,7 +111,10 @@
       
       $scope.selectedTask = false;
       $scope.selectedTaskCached = false;
-      
+      $scope.doneClick = function(task){
+        task.done = !task.done;
+        $scope.updateCounts();
+      }
       $scope.delete = function(){
          if(!$scope.selectedTask) return;
          myHelpers.array.removeItemByGUID($scope.selectedProject.taskList,$scope.selectedTask.guid);         
@@ -125,7 +138,9 @@
             angular.extend($scope.selectedTaskCached, task);  
           }    
           $scope.selectedTaskCached = false;      
-          $scope.selectedTask = false; $scope.$apply();          
+          $scope.selectedTask = false; 
+          $scope.updateCounts();
+          $scope.$apply();          
         });
         
       };
@@ -146,7 +161,6 @@
             $scope.titleEditing = false;
           }
       };
-      
      
       $scope.$watch('selectedProject',function(){ 
         $scope.selectedTask = false;     
@@ -191,7 +205,7 @@
         array.forEach(function(obj,index){
           var matchCount = 0;
           var keyCount = 0;
-          $.each(obj, function(key,value){
+          $.each(keyValueObj, function(key,value){
             keyCount++;
             if(obj[key] === value){
               matchCount++;           

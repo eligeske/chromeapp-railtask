@@ -15,7 +15,16 @@
     <main ng-controller="MainCtrl">      
       <aside>
         <ul>
-          <li ng-class="{selected: project == selectedProject}" ng-repeat="project in projectList" ng-click="showProjectDetails(project)">{{project.name}} - {{project.moneyCount}}</li>
+          <li ng-class="{selected: project == selectedProject}" 
+            ng-repeat="project in projectList" 
+            ng-click="showProjectDetails(project)">            
+            <div class="notification-holder">
+              <span ng-show="project.openCount" class="open-count">{{project.openCount}}</span>
+              <span ng-show="project.moneyCount" class="money">money</span>
+              <span ng-show="project.todayCount" class="today">today</span>              
+            </div>
+            <span  class="text-holder">{{project.name}}</span>
+            </li>
         </ul>
         <form>
           <input ng-show="showForm" type="text" ng-blur="showForm = false" focus-me="showForm" ng-keyup="checkkey($event)" ng-model="newProjectName" />
@@ -37,12 +46,12 @@
             <div ng-hide="selectedTask">
               <div class="task-scroll-wrap">
                 <ul ng-show="selectedProject.taskList.length">
-                  <li ng-repeat="task in selectedProject.taskList">
+                  <li ng-class="{done: task.done }" ng-repeat="task in selectedProject.taskList">
                     
                     <span ng-show="task.money">&dollar;</span>
                     <span ng-show="task.today">[!]</span>
                     <span ng-click="showTaskDetails(task)">{{task.name}}</span>
-                    <span ng-click="task.done = !task.done">{{task.done ? "[ X ]" : "[   ]" }}</span>
+                    <span ng-click="doneClick(task)">{{task.done ? "[ X ]" : "[   ]" }}</span>
                   </li>  
                 </ul>
                 </div>

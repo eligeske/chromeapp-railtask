@@ -3,7 +3,7 @@
 
 # Rail Task chrome application
 
-So many task apps, why another one? Missing features, or too many, this will be just right..... ┗(-_-)┛
+So many task apps, why another one? Too hot or too cold, Missing features, or just way too many...... ┗(-_-)┛
 
 Goal is to have tasks organized by project with a fast view to know if there is something to be done today or if any are worth money.
 
