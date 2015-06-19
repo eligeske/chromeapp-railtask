@@ -24,7 +24,7 @@
         font-weight: 700; }
         
 
-html, body { font-size: 100% !important; margin: 0; padding: 0;
+      html, body { font-size: 100% !important; margin: 0; padding: 0;
         line-height: 1.5;
           font-family: "Roboto", sans-serif;
           font-weight: normal;
@@ -51,12 +51,49 @@ html, body { font-size: 100% !important; margin: 0; padding: 0;
       }
       
       
-      /* layout */
+      /* confirm */
       
+      #confirm {
+        position: fixed; z-index: 10;
+      }
+      #confirm .cover {
+        background: rgba(0,0,0,.45);
+        position: fixed;
+        top: 0; left: 0; bottom:0;
+        width: 100%;
+      }
+      #confirm .message-box {
+        box-sizing: border-box;
+        background: #000;
+        height: 35px; color: #fff;
+        line-height: 35px;
+        position: absolute; z-index: 15;
+        padding: 0 0 0 15px;
+        width: 165px;
+        font-size: 14px;
+        top: 125px; left: 75px;
+      }
+      .message-box .pointer {
+        position: absolute; margin: -15px 0 0 110px;
+        width: 0; height: 0;border-left: 15px solid transparent;	border-right: 15px solid transparent;	
+	      border-bottom: 15px solid black;
+      }
+      .message-box .btn {
+        display: inline-block;
+        height: 35px; cursor: pointer; padding: 0 5px;
+        transition: background-color .1s ease;
+      }
+      .message-box .text-holder { padding-right: 5px; }
+      .message-box .yes:hover {
+        background-color: rgba(2, 139, 20, .7); 
+      }
+      .message-box .no:hover {
+        background-color: rgba(255, 0, 0, .7); 
+      }
       /* side bar */
       aside {
         position: fixed; top: 0px; bottom: 0px;
-        border-right: 1px solid #ccc; box-sizing: border-box;  
+         box-sizing: border-box;  
         width: 100px;      
       }
       aside button { width: 100%; }
@@ -65,11 +102,8 @@ html, body { font-size: 100% !important; margin: 0; padding: 0;
       }
       
       aside li {      
+        margin: 4px 0;
         cursor: pointer;
-        border-bottom: 2px dashed #E4E4E4;
-      }
-      aside li:hover, li.selected  {
-        font-weight: bold;
       }
       
       
@@ -81,14 +115,68 @@ html, body { font-size: 100% !important; margin: 0; padding: 0;
           border-left: 5px solid rgb(71, 71, 71);
           z-index: -1;
       }
-      aside .text-holder { display: inline-block; padding-left: 8px;  height: 40px; line-height: 42px; }
-      aside li .notification-holder { width: 100%; position: absolute; height: 12px; padding-right: 10px; text-align: right; }
-      aside li .money, aside li .today, aside li .open-count { float: right; padding-right: 5px;  text-align: center;  font-size: 9px;  }
-      aside li .money { color: rgb(2, 139, 20); }
-      aside li .today { color: red; }
+      aside .text-holder { 
+        display: inline-block; padding-left: 12px;  height: 40px; line-height: 44px; 
+        width: 87px;
+        max-width: 87px;
+        box-sizing: border-box;
+      }
+      aside li .notification-holder { 
+         text-align: right;
+          float: right;
+          width: 12px;
+          height: 40px;
+          overflow: hidden; 
+          padding-top: 7px;    
+          box-sizing: border-box;      
+       }
+       
+       
+      aside li .bar { 
+        display: block;
+        text-align: center;
+        font-size: 9px;
+        margin-top: 1px;
+        height: 12px;
+        width: 7px;
+        transition: width  0.4s ease, opacity 0.4s ease;
+        float:right;
+        opacity: .5;
+      }
+      aside li:hover .bar, aside li.selected .bar {
+        opacity: .9;
+        width: 17px;
+      }
+      .open-count { font-size: 8px;  vertical-align: top; }
+      aside .money { background-color: rgb(70, 215, 89); }
+      aside .today { background-color: red; }
+      .money { color: rgb(2, 139, 20); }
+      .today { color: red; }
       
       
       /* Details */
+      .no-task {
+        text-align: center;
+        padding: 25px;
+        color: rgba(42, 139, 234, 0.73);
+      }
+      .task-list .task-item { 
+          font-size: 12px;
+          padding: 0px 10px;
+          line-height: 35px;
+          height: 35px;
+          cursor: pointer;
+       }
+       .task-list .task-item:nth-child(2n+1){
+         background: rgba(0, 129, 255, 0.08);
+       }
+      .task-list .text-holder { 
+        font-weight: bold;
+        display: inline-block; width: 170px; max-width: 170px; overflow: hidden; 
+      }
+      .task-list .done .text-holder { font-weight: normal; }
+      .task-list .money, .task-list .today { float:right; }
+      .task-list .today { margin-right: 5px; }
       
       article form label {
           font-size: 12px;
@@ -102,7 +190,7 @@ html, body { font-size: 100% !important; margin: 0; padding: 0;
       }
       article {
         position: fixed; top: 0px; left: 100px; right: 0px; bottom: 0px;
-        box-sizing: border-box;
+        box-sizing: border-box; box-shadow: 0px 0px 6px -2px #000;
       }
       article h1 {
         margin: 0; padding: 10px; background: rgb(0, 129, 255); color: #fff; 
@@ -118,8 +206,8 @@ html, body { font-size: 100% !important; margin: 0; padding: 0;
          position: fixed;
          overflow-x: hidden; overflow-y: auto;
          top: 50px; bottom: 35px; right: 0px;
-         left: 105px;
-         padding: 10px;
+         left: 101px;
+         padding-top: 10px;
       }
       section .button-group button {
         position: fixed; bottom:0px; width:250px;
@@ -202,4 +290,5 @@ form div > div {
 
 .button-bar .money { background-image: url(../imgs/usd.png);background-size: 48%; }
 .button-bar .today { background-image: url(../imgs/fire.png); background-size: 62%; background-position-y: 3px; }
+.button-bar .done { background-image: url(../imgs/check.png); background-size: 55%; float:right; margin-right: 5px;}
 .button-bar .delete { background-image: url(../imgs/trash.png); background-size: 55%; float:right; margin-right: 5px;}

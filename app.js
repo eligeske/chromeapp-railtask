@@ -115,13 +115,15 @@
         task.done = !task.done;
         $scope.updateCounts();
       }
-      $scope.delete = function(){
+      $scope.delete = function(e){
          if(!$scope.selectedTask) return;
-         myHelpers.array.removeItemByGUID($scope.selectedProject.taskList,$scope.selectedTask.guid);         
-         updateProject($scope.selectedProject, function(){
-          $scope.selectedTaskCached = false;      
-          $scope.selectedTask = false; $scope.$apply();          
-        });
+         myHelpers.ui.confirm($(e.target),"delete?",function(){
+             myHelpers.array.removeItemByGUID($scope.selectedProject.taskList,$scope.selectedTask.guid);         
+             updateProject($scope.selectedProject, function(){
+              $scope.selectedTaskCached = false;      
+              $scope.selectedTask = false; $scope.$apply();          
+            });  
+         },function(){});         
       }
       $scope.save = function(){
         if(!$scope.selectedTask) return;
@@ -185,6 +187,27 @@
       s4() + '-' + s4() + s4() + s4();
   };
   var myHelpers = {
+    ui: {
+      confirm: function(target,message, yes,no){
+        
+        var mb = $("#confirm").find(".message-box");
+        var mbw = mb.outerWidth();
+        var tp = target.position();
+        var th = target.outerHeight();
+        var tw = target.outerWidth();
+        
+        mb.css({ top: (tp.top + th + 15) + "px", left: ((tp.left + (tw/2)) - (41)) + "px" });
+                
+        $('#confirm').find(".text-holder").text(message);
+        $('#confirm').find(".yes").unbind().bind('click',function(){
+          $('#confirm').hide(); yes();
+        });
+        $('#confirm').find(".no").unbind().bind('click',function(){
+          $('#confirm').hide(); no();
+        });
+        $('#confirm').show();
+      }
+    },
     array: {
       // return first object in array with matching key:val
       propMatch: function(array,keyName,valueMatch,getIndexInstead){
@@ -241,7 +264,10 @@
     this.guid = newGUID();
     this.name = "";
     this.description = "";  
-    this.createdDate = new Date();
+    this.createdDate = (function(){
+      var d = new Date();
+      return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+    })();
     this.cancelled = false;
     this.done = false;
     this.today = false;

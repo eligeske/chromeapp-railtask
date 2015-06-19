@@ -19,11 +19,10 @@
             ng-repeat="project in projectList" 
             ng-click="showProjectDetails(project)">            
             <div class="notification-holder">
-              <span ng-show="project.openCount" class="open-count">{{project.openCount}}</span>
-              <span ng-show="project.moneyCount" class="money">money</span>
-              <span ng-show="project.todayCount" class="today">today</span>              
+              <span ng-show="project.moneyCount" class="bar money"></span>
+              <span ng-show="project.todayCount" class="bar today"></span>              
             </div>
-            <span  class="text-holder">{{project.name}}</span>
+            <span  class="text-holder">{{project.name}} <span class="open-count">({{project.openCount}})</span></span>
             </li>
         </ul>
         <form>
@@ -43,26 +42,32 @@
            <span ng-hide="titleEditing" ng-click="$parent.selectedProject = false" class="btn-circle pull-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"></span></h1>
           <div>
             <!-- task list -->
-            <div ng-hide="selectedTask">
+            <div class="task-list" ng-hide="selectedTask">
               <div class="task-scroll-wrap">
                 <ul ng-show="selectedProject.taskList.length">
-                  <li ng-class="{done: task.done }" ng-repeat="task in selectedProject.taskList">
-                    
-                    <span ng-show="task.money">&dollar;</span>
-                    <span ng-show="task.today">[!]</span>
-                    <span ng-click="showTaskDetails(task)">{{task.name}}</span>
-                    <span ng-click="doneClick(task)">{{task.done ? "[ X ]" : "[   ]" }}</span>
+                  <li class="task-item" 
+                    ng-click="showTaskDetails(task)" 
+                    ng-class="{done: task.done }" ng-repeat="task in selectedProject.taskList">
+                    <span class="text-holder">{{task.name}}</span>
+                    <span ng-show="task.money" class="money">&dollar;</span>
+                    <span ng-show="task.today" class="today">[!]</span>                    
                   </li>  
                 </ul>
                 </div>
-                <div ng-hide="selectedProject.taskList.length">Add task below</div>
+                <div class="no-task" ng-hide="selectedProject.taskList.length">Add task below</div>
             </div>
             <!-- task form -->
             <form ng-show="selectedTask">
               <div class="button-bar">
-                <span ng-click="selectedTask.money = !selectedTask.money" ng-class="{selected:selectedTask.money}" class="btn money positive">&nbsp;</span>
-                <span ng-click="selectedTask.today = !selectedTask.today" ng-class="{selected:selectedTask.today}" class="btn today negative">&nbsp;</span>
-                <span ng-click="delete()" class="btn delete negative">&nbsp;</span>
+                <span title="Money maker" 
+                  ng-click="selectedTask.money = !selectedTask.money" ng-class="{selected:selectedTask.money}" class="btn money positive">&nbsp;</span>
+                <span title="Do Today!" 
+                  ng-click="selectedTask.today = !selectedTask.today" ng-class="{selected:selectedTask.today}" class="btn today negative">&nbsp;</span>
+                <span ng-click="delete($event)"  class="btn delete negative">&nbsp;</span>
+                <span ng-click="selectedTask.done = !selectedTask.done"
+                  title="Mark as done!"
+                  ng-class="{selected:selectedTask.done}"  
+                  class="btn done positive">&nbsp;</span>                
               </div>
               <div>
                 <label>task name</label>
@@ -90,7 +95,15 @@
 
       </article>
     </main>
-  
+    <div id="confirm" style="display: none">      
+      <div class="message-box">
+        <div class="pointer"></div>
+        <span class="text-holder">question?</span>
+        <span class="btn yes">YES</span>
+        <span class="btn no">NO</span>
+      </div>
+      <div class="cover"></div>
+    </div>
     <script type="text/javascript" src="js/angular.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
