@@ -22,7 +22,12 @@
               <span ng-show="project.moneyCount" class="bar money"></span>
               <span ng-show="project.todayCount" class="bar today"></span>              
             </div>
-            <span  class="text-holder">{{project.name}} <span class="open-count">({{project.openCount}})</span></span>
+            <span  class="text-holder">
+                  <svg width="95%" height="100%" viewBox="0 -200 1000 300"
+                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <text font-size="200" fill="black">{{project.name}} ({{project.openCount}})</text>
+                </svg>                
+               </span>
             </li>
         </ul>
         <form>

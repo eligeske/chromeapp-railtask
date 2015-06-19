@@ -159,7 +159,11 @@
       
       $scope.checkkey = function(e){
           if(e.keyCode == 13){
+            
             e.target.blur();
+            updateProject($scope.selectedProject, function(){
+                    
+            });
             $scope.titleEditing = false;
           }
       };
