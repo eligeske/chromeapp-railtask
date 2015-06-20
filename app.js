@@ -147,10 +147,11 @@
         
       };
       $scope.cancel = function(){
+        $scope.selectedTaskCached = false;
         $scope.selectedTask = false;
       }
       $scope.addTask = function(){
-        $scope.selectedTask = new Task(); 
+        $scope.showTaskDetails(new Task());
       }
       $scope.showTaskDetails = function(task){
         $scope.selectedTaskCached = task;
