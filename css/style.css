@@ -195,6 +195,8 @@
       article h1 {
         margin: 0; padding: 10px; background: rgb(0, 129, 255); color: #fff; 
       }
+      article h1 span.title-preview { font-size: 18px; }
+      article h1 span.title-edit input { font-size: 18px; padding: 3px; }
       article h1 input { color: #fff; font-weight: bold; width: 100px; height: 25px; line-height: 25px }      
       article textarea {
           width: 100%;

@@ -40,8 +40,8 @@
         <!-- Project Details -->
         <section ng-show="selectedProject">
           <h1>
-           <span ng-hide="titleEditing" ng-click="titleEditing=true">{{selectedProject.name}}</span>
-           <span ng-show="titleEditing">
+           <span class="title-preview" ng-hide="titleEditing" ng-click="titleEditing=true">{{selectedProject.name}}</span>
+           <span class="title-edit" ng-show="titleEditing">
              <input maxlength="7" ng-keyup="checkkey($event)" focus-me="titleEditing" ng-model="selectedProject.name" />
            </span>
            <span ng-hide="titleEditing" ng-click="$parent.selectedProject = false" class="btn-circle pull-right"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAMAAABhEH5lAAAAElBMVEX///////////////////////+65XQCAAAABXRSTlMAEDDQ8Iqcg70AAABMSURBVHjaddAxDgAgCANAqvL/L1sTrEPRBXIEA0SMNRH1MNc4kkkryaRRjl2hBUMZKlUCePGJTCKTyCQ/8kb/3ofoRvVit7YfpznhBl/4A43Ka0wDAAAAAElFTkSuQmCC"></span></h1>
