@@ -4,6 +4,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
     innerBounds: {
       maxWidth: 350,
       maxHeight: 415
-    }
+    },
+    "resizable": false
   });
 });
