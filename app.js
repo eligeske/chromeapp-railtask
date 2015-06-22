@@ -196,7 +196,6 @@
       confirm: function(target,message, yes,no){
         
         var mb = $("#confirm").find(".message-box");
-        var mbw = mb.outerWidth();
         var tp = target.position();
         var th = target.outerHeight();
         var tw = target.outerWidth();
@@ -256,10 +255,17 @@
   
   var updateProject = function(scopedProject, callback){
     var projObj = {};
+    sortTaskList(scopedProject);
     projObj[scopedProject.guid] = angular.copy(scopedProject);
     chrome.storage.sync.set(projObj,callback);
   }
-  
+  var sortTaskList = function(scopedProject){
+    scopedProject.taskList.sort(function(a,b){
+      var aD = new Date(a.createdDate);
+      var bD = new Date(b.createdDate);
+      return (a.done - b.done) || (b.today - a.today);
+    });
+  }
   var Project = function(){
     this.guid = newGUID();
     this.name = "";

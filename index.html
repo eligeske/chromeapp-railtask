@@ -31,7 +31,7 @@
             </li>
         </ul>
         <form>
-          <input maxlength="7" ng-show="showForm" type="text" ng-blur="showForm = false" focus-me="showForm" ng-keyup="checkkey($event)" ng-model="newProjectName" />
+          <input ng-maxlength="7" ng-show="showForm" type="text" ng-blur="showForm = false" focus-me="showForm" ng-keyup="checkkey($event)" ng-model="newProjectName" />
           <button class="positive" ng-hide="showForm" ng-click="showForm = true">+ add proj</button>
           <button class="negative" ng-show="showForm" ng-click="showForm = false">cancel</button>
         </form>

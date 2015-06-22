@@ -171,7 +171,7 @@
          background: rgba(0, 129, 255, 0.08);
        }
       .task-list .text-holder { 
-        font-weight: bold;
+        font-weight: bold; white-space: nowrap;
         display: inline-block; width: 170px; max-width: 170px; overflow: hidden; 
       }
       .task-list .done .text-holder { font-weight: normal; }
@@ -283,13 +283,18 @@ form div > div {
   background-color: rgba(155, 155, 155, 0.78) !important;
 }
 
-.button-bar .positive:hover, .button-bar .positive.selected {
-  background-color: rgb(0, 189, 17) !important;
+.button-bar .positive:hover {
+  background-color: rgba(0, 189, 17, .7) !important;
 }
-.button-bar .negative:hover, .button-bar .negative.selected {
-  background-color: rgb(255, 67, 67) !important;
+.button-bar .positive.selected {
+  background-color: rgba(0, 189, 17, 1) !important;
 }
-
+.button-bar .negative:hover {
+  background-color: rgba(255, 67, 67, .7)  !important;
+}
+.button-bar .negative.selected {
+  background-color: rgba(255, 67, 67, 1)  !important;
+}
 .button-bar .money { background-image: url(../imgs/usd.png);background-size: 48%; }
 .button-bar .today { background-image: url(../imgs/fire.png); background-size: 62%; background-position-y: 3px; }
 .button-bar .done { background-image: url(../imgs/check.png); background-size: 55%; float:right; margin-right: 5px;}
