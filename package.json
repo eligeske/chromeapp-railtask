@@ -1,0 +1,16 @@
+{
+  "name": "railtask-pwa",
+  "version": "1.0.0",
+  "description": "Rail Task - A task management PWA",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "echo 'No build required for this static site'"
+  },
+  "keywords": ["pwa", "task-management", "angular"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

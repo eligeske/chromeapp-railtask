@@ -1,6 +1,5 @@
 /// <reference path="typings/underscore/underscore.d.ts"/>
 /// <reference path="typings/jquery/jquery.d.ts"/>
-/* global chrome */
 /// <reference path="typings/angularjs/angular.d.ts"/>
 
 //(function(){
@@ -52,7 +51,7 @@
           proj.name = $scope.newProjectName;
           var obj = {};
           obj[proj.guid] = proj;
-          chrome.storage.sync.set(obj);
+          localStorage.setItem(proj.guid, JSON.stringify(proj));
           $scope.projectList.push(proj);
         };
         $scope.checkkey = function(e){
@@ -96,16 +95,22 @@
             resetForm();
           }
         });
-        chrome.storage.sync.get(function(items){
-          $.each(items,function(guid,item){
-            setCounts(item);
-            $scope.projectList.push(item); 
-          });          
-          if($scope.projectList.length){
-            $scope.selectedProject = $scope.projectList[0]; 
-            $scope.$apply(); 
+        // Load from localStorage
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)) {
+            try {
+              const item = JSON.parse(localStorage.getItem(key));
+              setCounts(item);
+              $scope.projectList.push(item);
+            } catch(e) {
+              console.error('Error parsing project:', e);
+            }
           }
-        });
+        }
+        if($scope.projectList.length){
+          $scope.selectedProject = $scope.projectList[0]; 
+        }
     }])
     .controller('ProjectCtrl',['$scope',function($scope){      
       
@@ -257,7 +262,8 @@
     var projObj = {};
     sortTaskList(scopedProject);
     projObj[scopedProject.guid] = angular.copy(scopedProject);
-    chrome.storage.sync.set(projObj,callback);
+    localStorage.setItem(scopedProject.guid, JSON.stringify(scopedProject));
+    if(callback) callback();
   }
   var sortTaskList = function(scopedProject){
     scopedProject.taskList.sort(function(a,b){

@@ -1,11 +1,17 @@
 {
-  "manifest_version": 2,
-  "version": "0.0.0.1",
   "name": "Rail Task",
-  "app": {
-    "background": {
-      "scripts": ["main.js"]
+  "short_name": "RailTask",
+  "description": "A task management app with project organization",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2196F3",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "imgs/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
-  },
-  "permissions": ["storage"]
+  ]
 }
